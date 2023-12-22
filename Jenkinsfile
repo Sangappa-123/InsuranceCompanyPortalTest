@@ -13,10 +13,10 @@ pipeline {
             steps {
                 script {
                     echo 'Before overwrite:'
-            sh 'cat config/configuration.json'
+            sh 'cat Config/Configuration.json'
                     
                     // Overwrite the configuration file
-                    writeFile file: 'config/configuration.json', text: '''
+                    writeFile file: 'Config/Configuration.json', text: '''
                         {
                 "data": {
                     "insuranceCarrier":"Openly Insurance Company",
@@ -45,7 +45,7 @@ pipeline {
                         }
                     '''
                     echo 'After overwrite:'
-            sh 'cat config/configuration.json'
+            sh 'cat Config/Configuration.json'
                 }
             }
         }
