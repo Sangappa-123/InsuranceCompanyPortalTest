@@ -12,6 +12,9 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                    echo 'Before overwrite:'
+            sh 'cat config/configuration.json'
+                    
                     // Overwrite the configuration file
                     writeFile file: 'config/configuration.json', text: '''
                         {
@@ -41,6 +44,8 @@ pipeline {
                 }
                         }
                     '''
+                    echo 'After overwrite:'
+            sh 'cat config/configuration.json'
                 }
             }
         }
