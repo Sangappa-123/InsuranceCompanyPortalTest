@@ -49,6 +49,11 @@ pipeline {
                 }
             }
         }
+        stage('Copy Artifacts') {
+            steps {
+                sh 'cp -r * /home/sakhaglobal/Downloads/Artigem/Builds/second'
+            }
+        }
 
         // Add more stages as needed
 
