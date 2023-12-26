@@ -37,7 +37,42 @@
                     """
                 }
             }
+        } 
+        stage('Create and Push Jenkinsfile') {
+            steps {
+                script {
+                    // Define the content of the Jenkinsfile
+                    def jenkinsfileContent = """
+                        pipeline {
+                            agent any
+                            stages {
+                                stage('Example Stage') {
+                                    steps {
+                                        echo 'Hello, this is an example stage!'
+                                    }
+                                }
+                            }
+                        }
+                    """
+
+                    // Define repository details
+                    def gitRepoUrl = 'https://github.com/Sangappa-123/InsuranceCompanyPortalTest.git'
+                    def gitBranch = 'sakha_master'  // or any branch you want to push to
+
+                    // Create Jenkinsfile
+                    writeFile file: 'Jenkinsfilenewcompany', text: jenkinsfileContent
+
+                    // Initialize Git
+                    checkout([$class: 'GitSCM', branches: [[name: gitBranch]], userRemoteConfigs: [[url: gitRepoUrl]]])
+
+                    // Commit and push Jenkinsfile
+                    sh 'git add Jenkinsfile'
+                    sh 'git commit -m "Add Jenkinsfile"'
+                    sh 'git push origin ${gitBranch}'
+                }
+            }
         }
+
     }
 
 
